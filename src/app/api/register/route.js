@@ -8,7 +8,7 @@ export async function POST(req) {
   try {
     const { nm_lengkap, email, username, password } = await req.json();
 
-    if (!nm_lengkap ||!email || !username || !password) {
+    if (!nm_lengkap || !email || !username || !password) {
       return NextResponse.json({ message: 'All fields are required' }, { status: 400 });
     }
 
@@ -46,3 +46,5 @@ export async function POST(req) {
     return NextResponse.json({ message: 'Internal Server Error' }, { status: 500 });
   }
 }
+
+
