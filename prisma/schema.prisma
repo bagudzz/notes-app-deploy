@@ -12,7 +12,7 @@ generator client {
 datasource db {
   provider   = "postgresql"
   url        = env("DATABASE_URL")
-  schemas    = ["auth", "tugas-akhir", "notes"]
+  schemas    = ["auth", "tugas-akhir", "notes","collection"]
   extensions = [uuidOssp(map: "uuid-ossp")]
 }
 
@@ -39,6 +39,7 @@ model User {
   updatedAt  DateTime @default(now())
 
   notes Notes[]
+  collection Collection[]
 
   @@schema("auth")
   resultProject ResultProject[]
@@ -75,4 +76,15 @@ model ReviewProject {
   project           ResultProject @relation(fields: [id_project], references: [id_project])
 
   @@schema("tugas-akhir")
+}
+
+model Collection {
+  id_book String @id
+  id_user    String
+  title String
+  description String
+  thumbnail String
+  user User @relation(fields: [id_user], references: [id_user]) 
+
+  @@schema("collection")
 }
